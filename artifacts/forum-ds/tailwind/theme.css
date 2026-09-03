@@ -1,0 +1,48 @@
+/* Forum DS — Tailwind CSS v4 theme
+   @import this after tailwind, then use utility tokens. */
+
+@import "../tokens/tokens.css";
+
+@theme {
+  --color-canvas: var(--forum-canvas);
+  --color-canvas-subtle: var(--forum-canvas-subtle);
+  --color-canvas-elevated: var(--forum-canvas-elevated);
+  --color-ink: var(--forum-ink);
+  --color-ink-muted: var(--forum-ink-muted);
+  --color-ink-subtle: var(--forum-ink-subtle);
+  --color-line: var(--forum-line);
+  --color-brand: var(--brand-primary);
+  --color-brand-hover: var(--brand-primary-hover);
+  --color-on-brand: var(--brand-on-primary);
+  --color-accent: var(--brand-accent);
+  --color-success: var(--forum-success);
+  --color-warning: var(--forum-warning);
+  --color-danger: var(--forum-danger);
+  --color-info: var(--forum-info);
+  --color-official: var(--forum-official);
+  --color-navy: var(--forum-navy-800);
+  --color-gold: var(--forum-gold-500);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --shadow-card: var(--shadow-1);
+  --shadow-overlay: var(--shadow-2);
+  --shadow-modal: var(--shadow-3);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+}
+
+/* Org theme example — SBA-like navy/gold already is the default.
+   Crimson campaign example:
+
+[data-org="campaign-crimson"] {
+  --brand-primary: #9b1c1c;
+  --brand-primary-hover: #7a1515;
+  --brand-on-primary: #fffbf4;
+  --brand-accent: #c4a35a;
+}
+*/

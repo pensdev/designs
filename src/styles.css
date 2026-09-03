@@ -1,0 +1,296 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --forum-canvas: #f4f1ea;
+  --forum-canvas-subtle: #e8e3d8;
+  --forum-canvas-elevated: #fffbf4;
+  --forum-canvas-inverse: #0c1219;
+  --forum-ink: #12171f;
+  --forum-ink-muted: #4b5563;
+  --forum-ink-subtle: #6b7280;
+  --forum-ink-inverse: #f4f1ea;
+  --forum-line: #d6d0c4;
+  --forum-line-strong: #b7b09f;
+  --forum-navy-950: #0b1724;
+  --forum-navy-900: #122033;
+  --forum-navy-800: #1b314c;
+  --forum-navy-700: #234368;
+  --forum-navy-600: #2c5a86;
+  --forum-navy-500: #3a73a4;
+  --forum-navy-100: #d9e6f2;
+  --forum-gold-700: #8a6a2b;
+  --forum-gold-600: #a78438;
+  --forum-gold-500: #c4a35a;
+  --forum-gold-400: #d4b87a;
+  --forum-gold-100: #f3e8c8;
+  --brand-primary: var(--forum-navy-800);
+  --brand-primary-hover: var(--forum-navy-900);
+  --brand-on-primary: var(--forum-canvas-elevated);
+  --brand-accent: var(--forum-navy-600);
+  --forum-success: #176b45;
+  --forum-success-soft: #d7efe4;
+  --forum-warning: #9a4e09;
+  --forum-warning-soft: #f8e6c8;
+  --forum-danger: #9b1c1c;
+  --forum-danger-soft: #f8d7d7;
+  --forum-info: #234368;
+  --forum-info-soft: #d9e6f2;
+  --forum-official: #1b314c;
+  --forum-official-soft: #e4eaf1;
+  --forum-gold: var(--forum-gold-500);
+  --shadow-1: 0 1px 2px rgba(18, 23, 31, 0.06), 0 1px 1px rgba(18, 23, 31, 0.04);
+  --shadow-2: 0 8px 24px rgba(18, 23, 31, 0.1), 0 2px 6px rgba(18, 23, 31, 0.06);
+  --shadow-3: 0 16px 40px rgba(18, 23, 31, 0.16);
+  --shadow-border:
+    0 0 0 1px rgba(18, 23, 31, 0.06), 0 1px 2px -1px rgba(18, 23, 31, 0.06),
+    0 2px 4px 0 rgba(18, 23, 31, 0.04);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-swift: 160ms;
+  --focus-ring: var(--forum-navy-500);
+  --tone-display-weight: 600;
+  --tone-tracking: -0.02em;
+  --tone-leading: 1.55;
+  --tone-section: 3.5rem;
+  --tone-btn-lg: 3rem;
+  --tone-chip-fill: 0;
+  --hero-cta-bg: var(--forum-canvas-elevated);
+  --hero-cta-fg: var(--forum-navy-950);
+  --hero-muted: color-mix(in srgb, var(--forum-ink-inverse) 74%, transparent);
+}
+
+[data-theme="dark"] {
+  --forum-canvas: #0c1219;
+  --forum-canvas-subtle: #151c26;
+  --forum-canvas-elevated: #1a2330;
+  --forum-canvas-inverse: #f4f1ea;
+  --forum-ink: #ede8df;
+  --forum-ink-muted: #b7b0a3;
+  --forum-ink-subtle: #8a8478;
+  --forum-ink-inverse: #12171f;
+  --forum-line: #2a3545;
+  --forum-line-strong: #3c4b5e;
+  --forum-navy-100: #1b314c;
+  --brand-primary: #ede8df;
+  --brand-primary-hover: #d6d0c4;
+  --brand-on-primary: #0c1219;
+  --brand-accent: var(--forum-navy-500);
+  --forum-success: #3dba7a;
+  --forum-success-soft: #143326;
+  --forum-warning: #e0a04a;
+  --forum-warning-soft: #3a2a12;
+  --forum-danger: #f07171;
+  --forum-danger-soft: #3a1616;
+  --forum-info: #8bb4d6;
+  --forum-info-soft: #1b314c;
+  --forum-official: #8bb4d6;
+  --forum-official-soft: #1b314c;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --focus-ring: var(--forum-navy-500);
+  --hero-cta-bg: var(--forum-canvas-elevated);
+  --hero-cta-fg: var(--forum-ink);
+}
+
+[data-org="civic"] {
+  --tone-display-weight: 600;
+  --tone-tracking: -0.02em;
+  --tone-leading: 1.55;
+  --tone-section: 3.5rem;
+  --tone-btn-lg: 3rem;
+  --tone-chip-fill: 0;
+  --brand-accent: var(--forum-navy-600);
+  --focus-ring: var(--forum-navy-500);
+  --hero-cta-bg: var(--forum-canvas-elevated);
+  --hero-cta-fg: var(--forum-navy-950);
+}
+
+[data-org="crimson"] {
+  --brand-primary: #9b1c1c;
+  --brand-primary-hover: #7a1515;
+  --brand-on-primary: #fffbf4;
+  --brand-accent: #9b1c1c;
+  --focus-ring: #9b1c1c;
+  --tone-display-weight: 700;
+  --tone-tracking: -0.035em;
+  --tone-leading: 1.42;
+  --tone-section: 2.5rem;
+  --tone-btn-lg: 3.5rem;
+  --tone-chip-fill: 1;
+  --hero-cta-bg: var(--brand-primary);
+  --hero-cta-fg: var(--brand-on-primary);
+}
+
+[data-org="forest"] {
+  --brand-primary: #176b45;
+  --brand-primary-hover: #0f4d31;
+  --brand-on-primary: #fffbf4;
+  --brand-accent: #176b45;
+  --focus-ring: #176b45;
+  --tone-display-weight: 600;
+  --tone-tracking: -0.025em;
+  --tone-leading: 1.5;
+  --tone-section: 3rem;
+  --tone-btn-lg: 3.125rem;
+  --tone-chip-fill: 0;
+  --hero-cta-bg: var(--brand-primary);
+  --hero-cta-fg: var(--brand-on-primary);
+}
+
+[data-theme="dark"][data-org="civic"] {
+  --brand-primary: #ede8df;
+  --brand-primary-hover: #d6d0c4;
+  --brand-on-primary: #0c1219;
+  --brand-accent: var(--forum-navy-500);
+  --hero-cta-bg: var(--forum-canvas-elevated);
+  --hero-cta-fg: var(--forum-ink);
+}
+
+[data-theme="dark"][data-org="crimson"] {
+  --brand-primary: #e45a5a;
+  --brand-primary-hover: #f07171;
+  --brand-on-primary: #0c1219;
+  --brand-accent: #e45a5a;
+  --focus-ring: #e45a5a;
+  --hero-cta-bg: var(--brand-primary);
+  --hero-cta-fg: var(--brand-on-primary);
+}
+
+[data-theme="dark"][data-org="forest"] {
+  --brand-primary: #3dba7a;
+  --brand-primary-hover: #6ad49a;
+  --brand-on-primary: #0c1219;
+  --brand-accent: #3dba7a;
+  --focus-ring: #3dba7a;
+  --hero-cta-bg: var(--brand-primary);
+  --hero-cta-fg: var(--brand-on-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-swift: 0ms;
+  }
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-canvas: var(--forum-canvas);
+  --color-canvas-subtle: var(--forum-canvas-subtle);
+  --color-canvas-elevated: var(--forum-canvas-elevated);
+  --color-canvas-inverse: var(--forum-canvas-inverse);
+  --color-ink: var(--forum-ink);
+  --color-ink-muted: var(--forum-ink-muted);
+  --color-ink-subtle: var(--forum-ink-subtle);
+  --color-ink-inverse: var(--forum-ink-inverse);
+  --color-line: var(--forum-line);
+  --color-line-strong: var(--forum-line-strong);
+  --color-brand: var(--brand-primary);
+  --color-brand-hover: var(--brand-primary-hover);
+  --color-on-brand: var(--brand-on-primary);
+  --color-accent: var(--brand-accent);
+  --color-success: var(--forum-success);
+  --color-success-soft: var(--forum-success-soft);
+  --color-warning: var(--forum-warning);
+  --color-warning-soft: var(--forum-warning-soft);
+  --color-danger: var(--forum-danger);
+  --color-danger-soft: var(--forum-danger-soft);
+  --color-info: var(--forum-info);
+  --color-info-soft: var(--forum-info-soft);
+  --color-official: var(--forum-official);
+  --color-official-soft: var(--forum-official-soft);
+  --color-navy: var(--forum-navy-800);
+  --color-navy-950: var(--forum-navy-950);
+  --color-navy-900: var(--forum-navy-900);
+  --color-navy-700: var(--forum-navy-700);
+  --color-navy-100: var(--forum-navy-100);
+  --color-gold: var(--forum-gold-500);
+  --color-gold-100: var(--forum-gold-100);
+  --color-gold-400: var(--forum-gold-400);
+  --color-gold-500: var(--forum-gold-500);
+  --color-gold-700: var(--forum-gold-700);
+  --color-hero-cta: var(--hero-cta-bg);
+  --color-on-hero-cta: var(--hero-cta-fg);
+  --color-hero-muted: var(--hero-muted);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-record: 2px;
+  --text-dense: 0.8125rem;
+  --text-dense--line-height: 1.3;
+  --shadow-card: var(--shadow-1);
+  --shadow-overlay: var(--shadow-2);
+  --shadow-modal: var(--shadow-3);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--forum-canvas);
+    color: var(--forum-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: var(--tone-leading);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    font-weight: var(--tone-display-weight);
+    letter-spacing: var(--tone-tracking);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .tone-chip {
+    border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    background: transparent;
+  }
+
+  [data-org="crimson"] .tone-chip {
+    background: var(--brand-primary);
+    color: var(--brand-on-primary);
+    border-color: transparent;
+  }
+}
+
+@layer components {
+  [data-density="compact"] {
+    font-size: 0.8125rem;
+    line-height: 1.3;
+  }
+
+  .btn-size-lg {
+    height: var(--tone-btn-lg);
+    min-height: var(--tone-btn-lg);
+  }
+}

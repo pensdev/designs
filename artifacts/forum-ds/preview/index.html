@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forum Design System — Political Tech</title>
+  <link rel="stylesheet" href="../tokens/tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--forum-canvas); color: var(--forum-ink); font-family: var(--font-sans); }
+    body { line-height: 1.5; }
+    a { color: var(--forum-navy-700); }
+    .wrap { max-width: var(--measure-frame); margin: 0 auto; padding: 0 var(--space-6); }
+    .hero { background: var(--forum-navy-900); color: var(--forum-ink-inverse); padding: 4.5rem 0 3.5rem; }
+    .hero .kicker { font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--forum-gold-400); font-weight: 600; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.1; font-weight: 700; margin: 0.5rem 0 0.75rem; }
+    .hero p { max-width: 38rem; color: #c9c2b5; margin: 0; font-size: 1.125rem; }
+    .hero-meta { display: flex; gap: 1rem; margin-top: 1.75rem; flex-wrap: wrap; }
+    .chip { border: 1px solid rgba(196,163,90,0.35); color: var(--forum-gold-400); padding: 0.25rem 0.6rem; border-radius: 999px; font-size: var(--text-caption); }
+    nav.toc { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--forum-canvas) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--forum-line); }
+    nav.toc .wrap { display: flex; gap: 1.25rem; overflow: auto; padding: 0.75rem var(--space-6); font-size: var(--text-body-sm); }
+    nav.toc a { color: var(--forum-ink-muted); text-decoration: none; white-space: nowrap; }
+    nav.toc a:hover { color: var(--forum-ink); }
+    section { padding: 3.5rem 0; border-bottom: 1px solid var(--forum-line); }
+    h2 { font-family: var(--font-display); font-size: var(--text-title); margin: 0 0 0.35rem; }
+    .lede { color: var(--forum-ink-muted); max-width: 40rem; margin: 0 0 2rem; }
+    h3 { font-size: var(--text-heading); margin: 2rem 0 0.75rem; }
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; }
+    .swatch { border: 1px solid var(--forum-line); border-radius: var(--radius-md); overflow: hidden; background: var(--forum-canvas-elevated); }
+    .swatch .chip-color { height: 64px; }
+    .swatch figcaption { padding: 0.5rem 0.65rem 0.7rem; font-size: var(--text-caption); }
+    .swatch code { display: block; color: var(--forum-ink-subtle); font-family: var(--font-mono); font-size: 10px; margin-top: 2px; }
+    .type-row { padding: 0.85rem 0; border-bottom: 1px solid var(--forum-line); display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; align-items: baseline; }
+    .type-row .label { font-size: var(--text-caption); color: var(--forum-ink-subtle); font-family: var(--font-mono); }
+    .t-display { font-family: var(--font-display); font-size: var(--text-display); font-weight: 700; line-height: 1.15; }
+    .t-title { font-family: var(--font-display); font-size: var(--text-title); font-weight: 700; }
+    .t-heading { font-family: var(--font-display); font-size: var(--text-heading); font-weight: 600; }
+    .t-sub { font-size: var(--text-subhead); font-weight: 500; }
+    .t-body { font-size: var(--text-body); }
+    .t-sm { font-size: var(--text-body-sm); color: var(--forum-ink-muted); }
+    .t-cap { font-size: var(--text-caption); color: var(--forum-ink-muted); }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    button, .btn { font-family: var(--font-sans); font-weight: 600; border-radius: var(--radius-md); border: 1px solid transparent; cursor: pointer; padding: 0.7rem 1.1rem; font-size: 0.9375rem; transition: background var(--duration-swift) var(--ease-standard), border-color var(--duration-swift) var(--ease-standard); }
+    button:focus-visible, .btn:focus-visible, input:focus-visible { outline: 2px solid var(--brand-accent); outline-offset: 2px; }
+    .btn-primary { background: var(--brand-primary); color: var(--brand-on-primary); }
+    .btn-primary:hover { background: var(--brand-primary-hover); }
+    .btn-secondary { background: transparent; color: var(--forum-ink); border-color: var(--forum-line-strong); }
+    .btn-secondary:hover { background: var(--forum-canvas-subtle); }
+    .btn-ghost { background: transparent; color: var(--forum-navy-700); }
+    .btn-danger { background: var(--forum-danger); color: white; }
+    .btn-official { background: var(--forum-navy-800); color: var(--forum-ink-inverse); }
+    .btn-lg { padding: 0.9rem 1.25rem; font-size: 1rem; min-height: 44px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .card { background: var(--forum-canvas-elevated); border: 1px solid var(--forum-line); border-radius: var(--radius-lg); padding: 1.25rem; box-shadow: var(--shadow-1); }
+    .card.official { border-color: color-mix(in srgb, var(--forum-navy-800) 25%, var(--forum-line)); }
+    .badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 999px; }
+    .badge-info { background: var(--forum-info-soft); color: var(--forum-info); }
+    .badge-success { background: var(--forum-success-soft); color: var(--forum-success); }
+    .badge-warn { background: var(--forum-warning-soft); color: var(--forum-warning); }
+    .badge-party { background: var(--forum-navy-100); color: var(--forum-navy-800); }
+    .idbar { display: flex; justify-content: space-between; gap: 1rem; align-items: center; font-size: var(--text-caption); color: var(--forum-ink-muted); border-bottom: 1px solid var(--forum-line); padding-bottom: 0.65rem; margin-bottom: 1rem; }
+    .amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    .amt { border: 1px solid var(--forum-line-strong); background: var(--forum-canvas); border-radius: var(--radius-md); padding: 0.75rem 0.5rem; font-weight: 600; text-align: center; }
+    .amt[aria-pressed="true"] { border-color: var(--brand-primary); background: var(--forum-official-soft); color: var(--forum-navy-900); }
+    .paid { font-size: var(--text-caption); color: var(--forum-ink-muted); border-top: 1px solid var(--forum-line); margin-top: 1rem; padding-top: 0.75rem; }
+    .official-card h3 { font-family: var(--font-display); margin: 0.35rem 0 0.15rem; font-size: 1.35rem; }
+    .official-card .meta { color: var(--forum-ink-muted); font-size: var(--text-body-sm); }
+    .portrait { width: 64px; height: 64px; border-radius: var(--radius-md); background: linear-gradient(160deg, var(--forum-navy-700), var(--forum-navy-950)); }
+    .alert { padding: 0.85rem 1rem; border-radius: var(--radius-md); background: var(--forum-warning-soft); color: var(--forum-ink); border: 1px solid color-mix(in srgb, var(--forum-warning) 30%, var(--forum-line)); font-size: var(--text-body-sm); }
+    .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .principles article { background: var(--forum-canvas-elevated); border: 1px solid var(--forum-line); border-radius: var(--radius-lg); padding: 1.1rem 1.15rem; }
+    .principles strong { display: block; font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.35rem; }
+    .principles p { margin: 0; color: var(--forum-ink-muted); font-size: var(--text-body-sm); }
+    footer.site { padding: 2rem 0 3rem; color: var(--forum-ink-subtle); font-size: var(--text-caption); }
+    .toggle { margin-left: auto; }
+    table.tokens { width: 100%; border-collapse: collapse; font-size: var(--text-body-sm); }
+    table.tokens th, table.tokens td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--forum-line); }
+    table.tokens th { font-size: var(--text-caption); color: var(--forum-ink-subtle); font-weight: 600; }
+    code { font-family: var(--font-mono); font-size: 0.8em; }
+    .mono { font-family: var(--font-mono); }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="kicker">Forum Design System · v0.1</div>
+      <h1>Political tech, built to be believed.</h1>
+      <p>A civic product layer for campaigns, advocacy orgs, donation flows, field tools, and policy dashboards. Brand sits on top. Structure, compliance, and action stay stable.</p>
+      <div class="hero-meta">
+        <span class="chip">WCAG 2.2 AA floor</span>
+        <span class="chip">Tokens first</span>
+        <span class="chip">Themable brand</span>
+        <span class="chip">Light + dark</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <div class="wrap">
+      <a href="#principles">Principles</a>
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#components">Components</a>
+      <a href="#patterns">Patterns</a>
+      <button class="btn btn-secondary toggle" type="button" id="themeBtn" style="padding:0.3rem 0.7rem;font-size:12px;">Toggle dark</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="principles">
+      <div class="wrap">
+        <h2>Principles</h2>
+        <p class="lede">Decision filters. If a campaign overlay fights a principle, the principle wins.</p>
+        <div class="principles">
+          <article><strong>Earn trust</strong><p>Who is speaking, who paid, and when the data was current — visible without a hunt.</p></article>
+          <article><strong>One civic act</strong><p>Donate, sign, call, look up. One primary CTA per viewport.</p></article>
+          <article><strong>Tell the truth</strong><p>No fake urgency. Polls and counts carry methodology and as-of dates.</p></article>
+          <article><strong>Accessible floor</strong><p>AA contrast, 44px field targets, meaning never encoded in color alone.</p></article>
+          <article><strong>Brand is a layer</strong><p>Orgs change --brand-*. They do not redefine danger, success, or official.</p></article>
+          <article><strong>Field-fast</strong><p>Action is possible before maps, video, or voter-file widgets load.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="color">
+      <div class="wrap">
+        <h2>Color</h2>
+        <p class="lede">Warm paper and institutional navy. Gold is accent, not a fill. Party colors exist only as optional chips.</p>
+        <h3>Canvas & ink</h3>
+        <div class="swatches">
+          <figure class="swatch"><div class="chip-color" style="background:#F4F1EA"></div><figcaption>canvas<code>#F4F1EA</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#FFFBF4"></div><figcaption>elevated<code>#FFFBF4</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#12171F"></div><figcaption>ink<code>#12171F</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#4B5563"></div><figcaption>ink-muted<code>#4B5563</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#D6D0C4"></div><figcaption>line<code>#D6D0C4</code></figcaption></figure>
+        </div>
+        <h3>Navy & gold</h3>
+        <div class="swatches">
+          <figure class="swatch"><div class="chip-color" style="background:#0B1724"></div><figcaption>navy-950<code>#0B1724</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#1B314C"></div><figcaption>navy-800 / brand default<code>#1B314C</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#2C5A86"></div><figcaption>navy-600<code>#2C5A86</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#C4A35A"></div><figcaption>gold-500 accent<code>#C4A35A</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#F3E8C8"></div><figcaption>gold-100<code>#F3E8C8</code></figcaption></figure>
+        </div>
+        <h3>Semantic</h3>
+        <div class="swatches">
+          <figure class="swatch"><div class="chip-color" style="background:#176B45"></div><figcaption>success<code>#176B45</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#9A4E09"></div><figcaption>warning<code>#9A4E09</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#9B1C1C"></div><figcaption>danger<code>#9B1C1C</code></figcaption></figure>
+          <figure class="swatch"><div class="chip-color" style="background:#234368"></div><figcaption>info / official<code>#234368</code></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="type">
+      <div class="wrap">
+        <h2>Typography</h2>
+        <p class="lede">Source Serif 4 for civic display. IBM Plex Sans for UI. IBM Plex Mono for bill numbers and FEC IDs.</p>
+        <div class="type-row"><span class="label">display</span><span class="t-display">The record is public.</span></div>
+        <div class="type-row"><span class="label">title</span><span class="t-title">Look up your representatives</span></div>
+        <div class="type-row"><span class="label">heading</span><span class="t-heading">Contribute to the committee</span></div>
+        <div class="type-row"><span class="label">subhead</span><span class="t-sub">Sen. Maria Chen · NY-Class I</span></div>
+        <div class="type-row"><span class="label">body</span><span class="t-body">Paid for by Example Committee. Contributions are not tax deductible. Occupations and employers are reported as required.</span></div>
+        <div class="type-row"><span class="label">caption</span><span class="t-cap">As of Sept 2, 2026 · Source: Congress.gov</span></div>
+        <div class="type-row"><span class="label">mono</span><span class="mono">S. 214 · FEC C00412345 · NY-02</span></div>
+      </div>
+    </section>
+
+    <section id="components">
+      <div class="wrap">
+        <h2>Components</h2>
+        <p class="lede">Primary is the only filled brand button on a page. Official is navy. Danger is reserved for irreversible acts.</p>
+        <h3>Buttons</h3>
+        <div class="row">
+          <button class="btn btn-primary btn-lg" type="button">Contribute $50</button>
+          <button class="btn btn-secondary" type="button">Share</button>
+          <button class="btn btn-ghost" type="button">Skip for now</button>
+          <button class="btn btn-official" type="button">View record</button>
+          <button class="btn btn-danger" type="button">Cancel monthly gift</button>
+        </div>
+        <h3>Badges</h3>
+        <div class="row">
+          <span class="badge badge-info">Introduced</span>
+          <span class="badge badge-success">Filed</span>
+          <span class="badge badge-warn">Deadline Friday</span>
+          <span class="badge badge-party">NY-02</span>
+        </div>
+        <h3>Alert</h3>
+        <div class="alert"><strong>Comment period closes Sept 12.</strong> Source: Federal Register. This is a real deadline, not a marketing timer.</div>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <div class="wrap">
+        <h2>Patterns</h2>
+        <p class="lede">Two screens every political product eventually ships. Built here as the reference, not as decoration.</p>
+        <div class="grid-2">
+          <article class="card">
+            <div class="idbar">
+              <span>Example Committee · PAC</span>
+              <span class="badge badge-info">Contribution</span>
+            </div>
+            <h3 style="margin-top:0;font-family:var(--font-display);">Contribute</h3>
+            <p class="t-sm" style="margin-top:0;">One-time or monthly. Recurring is off until you turn it on.</p>
+            <div class="amounts" role="group" aria-label="Amount">
+              <button class="amt" type="button">$25</button>
+              <button class="amt" type="button" aria-pressed="true">$50</button>
+              <button class="amt" type="button">$100</button>
+              <button class="amt" type="button">$250</button>
+              <button class="amt" type="button">Other</button>
+            </div>
+            <label class="t-sm" style="display:flex;gap:0.5rem;align-items:center;margin:0.5rem 0 1rem;">
+              <input type="checkbox" /> Make this monthly
+            </label>
+            <button class="btn btn-primary btn-lg" type="button" style="width:100%;">Contribute $50</button>
+            <p class="paid">Paid for by Example Committee, 100 Civic Way, Washington, DC 20001. Not authorized by any candidate or candidate’s committee.</p>
+          </article>
+
+          <article class="card official official-card">
+            <div class="idbar">
+              <span>Official record</span>
+              <span class="t-cap">As of Sept 2, 2026</span>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:flex-start;">
+              <div class="portrait" aria-hidden="true"></div>
+              <div>
+                <span class="badge badge-party">NY-02</span>
+                <h3>Rep. Alexandra Ruiz</h3>
+                <div class="meta">U.S. House · 2nd District of New York</div>
+              </div>
+            </div>
+            <p class="t-sm">Next town hall: Sept 18, Babylon. Phone hours 9–5 ET.</p>
+            <div class="row">
+              <button class="btn btn-official" type="button">Call office</button>
+              <button class="btn btn-secondary" type="button">Write</button>
+              <button class="btn btn-ghost" type="button">Voting record</button>
+            </div>
+            <p class="paid">Source: Congress.gov member API · District lookup via Census TIGER. Party affiliation omitted from chrome; shown in record view.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">Forum DS v0.1 · Tokens at <code>forum-ds/tokens</code> · Not a government identity system.</div>
+  </footer>
+
+  <script>
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      const dark = document.documentElement.getAttribute("data-theme") === "dark";
+      document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+    });
+  </script>
+</body>
+</html>

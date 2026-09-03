@@ -1,0 +1,138 @@
+/* Forum DS v0.1 — primitive + semantic tokens
+   Override only --brand-* in an org theme. */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap");
+
+:root {
+  --forum-canvas: #f4f1ea;
+  --forum-canvas-subtle: #e8e3d8;
+  --forum-canvas-elevated: #fffbf4;
+  --forum-canvas-inverse: #0c1219;
+
+  --forum-ink: #12171f;
+  --forum-ink-muted: #4b5563;
+  --forum-ink-subtle: #6b7280;
+  --forum-ink-inverse: #f4f1ea;
+
+  --forum-line: #d6d0c4;
+  --forum-line-strong: #b7b09f;
+
+  --forum-navy-950: #0b1724;
+  --forum-navy-900: #122033;
+  --forum-navy-800: #1b314c;
+  --forum-navy-700: #234368;
+  --forum-navy-600: #2c5a86;
+  --forum-navy-500: #3a73a4;
+  --forum-navy-100: #d9e6f2;
+
+  --forum-gold-700: #8a6a2b;
+  --forum-gold-600: #a78438;
+  --forum-gold-500: #c4a35a;
+  --forum-gold-400: #d4b87a;
+  --forum-gold-100: #f3e8c8;
+
+  --brand-primary: var(--forum-navy-800);
+  --brand-primary-hover: var(--forum-navy-900);
+  --brand-on-primary: var(--forum-canvas-elevated);
+  --brand-accent: var(--forum-gold-500);
+
+  --forum-success: #176b45;
+  --forum-success-soft: #d7efe4;
+  --forum-warning: #9a4e09;
+  --forum-warning-soft: #f8e6c8;
+  --forum-danger: #9b1c1c;
+  --forum-danger-soft: #f8d7d7;
+  --forum-info: #234368;
+  --forum-info-soft: #d9e6f2;
+  --forum-official: #1b314c;
+  --forum-official-soft: #e4eaf1;
+
+  --forum-party-d: #2c5a86;
+  --forum-party-r: #9b1c1c;
+  --forum-party-i: #5b6670;
+
+  --font-display: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-sans: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-micro: 0.6875rem;
+  --text-caption: 0.75rem;
+  --text-body-sm: 0.875rem;
+  --text-body: 1rem;
+  --text-subhead: 1.25rem;
+  --text-heading: 1.5rem;
+  --text-title: 2rem;
+  --text-display: 2.5rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 999px;
+
+  --shadow-1: 0 1px 2px rgba(18, 23, 31, 0.06), 0 1px 1px rgba(18, 23, 31, 0.04);
+  --shadow-2: 0 8px 24px rgba(18, 23, 31, 0.1), 0 2px 6px rgba(18, 23, 31, 0.06);
+  --shadow-3: 0 16px 40px rgba(18, 23, 31, 0.16);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-instant: 80ms;
+  --duration-swift: 160ms;
+  --duration-deliberate: 240ms;
+
+  --measure-content: 42rem;
+  --measure-frame: 70rem;
+  --measure-wide: 90rem;
+}
+
+[data-theme="dark"] {
+  --forum-canvas: #0c1219;
+  --forum-canvas-subtle: #151c26;
+  --forum-canvas-elevated: #1a2330;
+  --forum-canvas-inverse: #f4f1ea;
+
+  --forum-ink: #ede8df;
+  --forum-ink-muted: #b7b0a3;
+  --forum-ink-subtle: #8a8478;
+  --forum-ink-inverse: #12171f;
+
+  --forum-line: #2a3545;
+  --forum-line-strong: #3c4b5e;
+
+  --brand-primary: var(--forum-gold-500);
+  --brand-primary-hover: var(--forum-gold-400);
+  --brand-on-primary: #0c1219;
+  --brand-accent: var(--forum-gold-400);
+
+  --forum-success: #3dba7a;
+  --forum-success-soft: #143326;
+  --forum-warning: #e0a04a;
+  --forum-warning-soft: #3a2a12;
+  --forum-danger: #f07171;
+  --forum-danger-soft: #3a1616;
+  --forum-info: #8bb4d6;
+  --forum-info-soft: #1b314c;
+  --forum-official: #c4a35a;
+  --forum-official-soft: #1b314c;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-swift: 0ms;
+    --duration-deliberate: 0ms;
+  }
+}

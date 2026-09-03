@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Forum Design System",
+      "hasCanvas": false,
+      "bodyTextLen": 2317,
+      "bodyTextHash": "47c7ff2b0b7b649e9fa7f820afa03a134f7ed25a53ec0b2d44d7b81ed0dd087f",
+      "bodyTextPrefix": "Forum DS Overview Foundations Components Patterns Brand theme Ci",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Forum Design System",
+      "hasCanvas": false,
+      "bodyTextLen": 2229,
+      "bodyTextHash": "d2d55de721d86621ce4bc24dee5612cc972e9a1ec03a14c16ef56aa57ab30e09",
+      "bodyTextPrefix": "Forum Brand theme FORUM DESIGN SYSTEM · V0.1 Political tech, bui",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
