@@ -67,7 +67,7 @@ export function ContributeForm({ org }: { org: Org }) {
       <IdentityBar orgName={meta.committee} orgType={meta.type} verified />
       <h2 className="mt-0 mb-1 font-display text-2xl text-ink">Contribute</h2>
       <p className="mt-0 mb-4 text-sm text-ink-muted">
-        One-time or monthly. Recurring stays off until you turn it on.
+        Pick an amount and a schedule. Nothing repeats unless you choose it.
       </p>
       <AmountPicker
         amounts={SAMPLE_AMOUNTS}

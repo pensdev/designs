@@ -6,7 +6,12 @@ import { cn } from "@/lib/utils";
 export type VotePosition = {
   roll: string;
   question: string;
-  position: "Yea" | "Nay" | "Present" | "Not voting";
+  /**
+   * A member's position ("Yea", "Nay", "Present", "Not voting") or a chamber
+   * result ("Passed", "Failed"). They are different claims, so a table showing
+   * the latter must relabel the column via `positionHeader`.
+   */
+  position: string;
   date: string;
 };
 
@@ -29,6 +34,8 @@ type RollCallTableProps = {
   votes: VotePosition[];
   density?: RecordDensity;
   embedded?: boolean;
+  /** "Position" for member votes, "Result" for chamber outcomes. */
+  positionHeader?: string;
   source?: string;
   retrieved?: string;
   api?: string;
@@ -38,6 +45,7 @@ export function RollCallTable({
   votes,
   density = "compact",
   embedded,
+  positionHeader = "Position",
   source = "Congress.gov",
   retrieved = "Sept 2, 2026",
   api = "vote API",
@@ -49,7 +57,7 @@ export function RollCallTable({
           <tr className="h-8 border-b border-line text-ink-muted">
             <th className="px-3 font-mono text-xs font-medium">Roll</th>
             <th className="px-3 text-xs font-medium">Question</th>
-            <th className="px-3 text-xs font-medium">Position</th>
+            <th className="px-3 text-xs font-medium">{positionHeader}</th>
             <th className="px-3 text-right text-xs font-medium">Date</th>
           </tr>
         </thead>

@@ -12,11 +12,11 @@ const buttonVariants = cva(
         secondary:
           "border border-line-strong bg-transparent text-ink hover:bg-canvas-subtle",
         ghost: "bg-transparent text-navy-700 hover:bg-canvas-subtle dark:text-ink",
-        danger: "bg-danger text-canvas-elevated hover:opacity-90 dark:text-canvas-inverse",
-        official: "bg-navy text-ink-inverse hover:bg-navy-900 dark:bg-official dark:text-canvas-inverse",
+        danger: "bg-danger text-canvas-elevated hover:opacity-90 dark:text-canvas",
+        official: "bg-navy text-ink-inverse hover:bg-navy-900 dark:bg-official dark:text-canvas",
       },
       size: {
-        sm: "h-10 min-h-10 rounded-sm px-3 text-sm",
+        sm: "h-10 min-h-10 rounded-md px-3 text-sm",
         md: "h-11 min-h-11 rounded-md px-4 text-sm",
         lg: "btn-size-lg rounded-md px-5 text-base",
       },

@@ -1,4 +1,10 @@
-import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
+import { cloneElement, isValidElement } from "react";
+import type {
+  InputHTMLAttributes,
+  ReactElement,
+  ReactNode,
+  TextareaHTMLAttributes,
+} from "react";
 import { cn } from "@/lib/utils";
 
 type FieldProps = {
@@ -9,6 +15,16 @@ type FieldProps = {
   optional?: boolean;
   children: ReactNode;
 };
+
+/** Attach the hint/error ids to the control so they are announced, not just rendered. */
+function describe(children: ReactNode, describedBy?: string) {
+  if (!describedBy || !isValidElement(children)) return children;
+  const element = children as ReactElement<{ "aria-describedby"?: string }>;
+  const existing = element.props["aria-describedby"];
+  return cloneElement(element, {
+    "aria-describedby": existing ? `${existing} ${describedBy}` : describedBy,
+  });
+}
 
 export function Field({ id, label, hint, error, optional, children }: FieldProps) {
   const hintId = hint ? `${id}-hint` : undefined;
@@ -21,7 +37,7 @@ export function Field({ id, label, hint, error, optional, children }: FieldProps
           <span className="ml-1.5 font-normal text-ink-subtle">optional</span>
         ) : null}
       </label>
-      {children}
+      {describe(children, error ? errorId : hintId)}
       {hint && !error ? (
         <p id={hintId} className="text-xs text-ink-muted">
           {hint}
