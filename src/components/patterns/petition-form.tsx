@@ -7,6 +7,7 @@ import {
   IdentityBar,
   Input,
   PaidForBy,
+  Callout,
   PetitionCounter,
   ProvenanceStamp,
 } from "@/components/forum";
@@ -45,9 +46,12 @@ export function PetitionForm({ org }: { org: Org }) {
       </p>
       <PetitionCounter current={count} goal={25000} updatedAt="today, 4:10 p.m. ET" />
       {done ? (
-        <p className="mt-4 mb-0 rounded-md bg-success-soft px-3 py-3 text-sm text-success" role="status">
-          Signed. District offices matching {zip} will receive this comment.
-        </p>
+        <Callout rule="var(--forum-success)" className="mt-4 py-2.5" role="status">
+          <p className="m-0 font-mono text-xs tracking-widest text-success uppercase">Signed</p>
+          <p className="mt-1 mb-0 text-sm leading-snug text-ink">
+            District offices matching {zip} will receive this comment.
+          </p>
+        </Callout>
       ) : (
         <div className="mt-4 grid gap-3">
           <Field id="pet-name" label="Full name">

@@ -1,36 +1,42 @@
-import { CircleAlert, Info, TriangleAlert } from "lucide-react";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { Callout } from "./callout";
+
+type Tone = "info" | "warning" | "danger";
 
 type AlertBannerProps = {
-  tone?: "info" | "warning" | "danger";
+  tone?: Tone;
   title: string;
   children?: ReactNode;
 };
 
-const ICONS = {
-  info: Info,
-  warning: TriangleAlert,
-  danger: CircleAlert,
+const RULE: Record<Tone, string> = {
+  info: "var(--forum-info)",
+  warning: "var(--forum-warning)",
+  danger: "var(--forum-danger)",
+};
+
+const LABEL: Record<Tone, string> = {
+  info: "Note",
+  warning: "Notice",
+  danger: "Problem",
+};
+
+const LABEL_COLOR: Record<Tone, string> = {
+  info: "text-info",
+  warning: "text-warning",
+  danger: "text-danger",
 };
 
 export function AlertBanner({ tone = "info", title, children }: AlertBannerProps) {
-  const Icon = ICONS[tone];
   return (
-    <div
-      role="status"
-      className={cn(
-        "flex gap-3 rounded-md border px-4 py-3 text-sm text-ink",
-        tone === "info" && "border-info/25 bg-info-soft",
-        tone === "warning" && "border-warning/30 bg-warning-soft",
-        tone === "danger" && "border-danger/30 bg-danger-soft",
-      )}
-    >
-      <Icon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-      <div>
-        <p className="m-0 font-semibold">{title}</p>
-        {children ? <p className="mt-1 mb-0 text-ink-muted">{children}</p> : null}
-      </div>
-    </div>
+    <Callout role="status" rule={RULE[tone]} className="py-2.5">
+      <p className={`m-0 font-mono text-xs tracking-widest uppercase ${LABEL_COLOR[tone]}`}>
+        {LABEL[tone]}
+      </p>
+      <p className="mt-1 mb-0 text-sm leading-snug font-semibold text-ink">{title}</p>
+      {children ? (
+        <p className="mt-1 mb-0 text-sm leading-snug text-ink-muted">{children}</p>
+      ) : null}
+    </Callout>
   );
 }

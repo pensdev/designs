@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsRouteImport } from './routes/components'
 import { Route as FoundationsRouteImport } from './routes/foundations'
+import { Route as LiveRouteImport } from './routes/live'
 import { Route as PatternsRouteImport } from './routes/patterns'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const FoundationsRoute = FoundationsRouteImport.update({
   path: '/foundations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PatternsRoute = PatternsRouteImport.update({
   id: '/patterns',
   path: '/patterns',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components': typeof ComponentsRoute
   '/foundations': typeof FoundationsRoute
+  '/live': typeof LiveRoute
   '/patterns': typeof PatternsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components': typeof ComponentsRoute
   '/foundations': typeof FoundationsRoute
+  '/live': typeof LiveRoute
   '/patterns': typeof PatternsRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/components': typeof ComponentsRoute
   '/foundations': typeof FoundationsRoute
+  '/live': typeof LiveRoute
   '/patterns': typeof PatternsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/components' | '/foundations' | '/patterns'
+  fullPaths: '/' | '/components' | '/foundations' | '/live' | '/patterns'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/components' | '/foundations' | '/patterns'
-  id: '__root__' | '/' | '/components' | '/foundations' | '/patterns'
+  to: '/' | '/components' | '/foundations' | '/live' | '/patterns'
+  id: '__root__' | '/' | '/components' | '/foundations' | '/live' | '/patterns'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsRoute: typeof ComponentsRoute
   FoundationsRoute: typeof FoundationsRoute
+  LiveRoute: typeof LiveRoute
   PatternsRoute: typeof PatternsRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FoundationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/patterns': {
       id: '/patterns'
       path: '/patterns'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsRoute: ComponentsRoute,
   FoundationsRoute: FoundationsRoute,
+  LiveRoute: LiveRoute,
   PatternsRoute: PatternsRoute,
 }
 export const routeTree = rootRouteImport

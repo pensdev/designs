@@ -1,9 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
-import { Button } from "@/components/forum";
+import { Button, Select } from "@/components/forum";
 import { useTheme } from "@/components/theme-provider";
-import { ORG_META, ORGS } from "@/lib/theme";
+import { ORG_META, ORGS, type Org } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -11,7 +11,14 @@ const NAV = [
   { to: "/foundations", label: "Foundations" },
   { to: "/components", label: "Components" },
   { to: "/patterns", label: "Patterns" },
+  { to: "/live", label: "Live data" },
 ] as const;
+
+const ORG_OPTIONS = ORGS.map((o) => ({
+  value: o,
+  label: ORG_META[o].label,
+  hint: ORG_META[o].tone,
+}));
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { theme, org, setTheme, setOrg } = useTheme();
@@ -20,7 +27,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-canvas text-ink">
-      <header className="sticky top-0 z-20 border-b border-line bg-canvas/95 backdrop-blur-md">
+      <header className="sticky top-0 z-20 border-b border-line bg-canvas">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-baseline gap-2 no-underline">
             <span className="font-display text-xl font-bold tracking-tight text-ink">Forum</span>
@@ -34,10 +41,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm no-underline",
+                  "border-b-2 px-3 py-2 text-sm no-underline",
                   pathname === item.to
-                    ? "bg-canvas-subtle font-medium text-ink"
-                    : "text-ink-muted hover:text-ink",
+                    ? "border-gold font-medium text-ink"
+                    : "border-transparent text-ink-muted hover:text-ink",
                 )}
               >
                 {item.label}
@@ -45,21 +52,16 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            <label className="sr-only" htmlFor="org-select">
-              Brand theme
-            </label>
-            <select
-              id="org-select"
-              value={org}
-              onChange={(e) => setOrg(e.target.value as (typeof ORGS)[number])}
-              className="hidden h-10 max-w-40 rounded-md border border-line-strong bg-canvas-elevated px-2 text-sm text-ink sm:block"
-            >
-              {ORGS.map((o) => (
-                <option key={o} value={o}>
-                  {ORG_META[o].label}
-                </option>
-              ))}
-            </select>
+            <div className="hidden w-44 sm:block">
+              <Select<Org>
+                id="org-select"
+                aria-label="Brand theme"
+                size="sm"
+                value={org}
+                onValueChange={setOrg}
+                options={ORG_OPTIONS}
+              />
+            </div>
             <Button
               type="button"
               variant="secondary"
@@ -91,8 +93,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "rounded-md px-3 py-3 text-base no-underline",
-                    pathname === item.to ? "bg-canvas-subtle text-ink" : "text-ink-muted",
+                    "border-l-2 px-3 py-3 text-base no-underline",
+                    pathname === item.to
+                      ? "border-gold font-medium text-ink"
+                      : "border-transparent text-ink-muted",
                   )}
                 >
                   {item.label}
@@ -102,18 +106,15 @@ export function AppShell({ children }: { children: ReactNode }) {
             <label className="mt-3 block text-xs text-ink-muted" htmlFor="org-select-mobile">
               Brand theme
             </label>
-            <select
-              id="org-select-mobile"
-              value={org}
-              onChange={(e) => setOrg(e.target.value as (typeof ORGS)[number])}
-              className="mt-1 h-11 w-full rounded-md border border-line-strong bg-canvas-elevated px-2 text-sm"
-            >
-              {ORGS.map((o) => (
-                <option key={o} value={o}>
-                  {ORG_META[o].label}
-                </option>
-              ))}
-            </select>
+            <div className="mt-1">
+              <Select<Org>
+                id="org-select-mobile"
+                aria-label="Brand theme"
+                value={org}
+                onValueChange={setOrg}
+                options={ORG_OPTIONS}
+              />
+            </div>
           </div>
         ) : null}
       </header>

@@ -27,7 +27,7 @@ function PatternsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <h1 className="mt-0 mb-2 font-display text-4xl">Patterns</h1>
-      <p className="mt-0 mb-8 max-w-xl text-ink-muted">
+      <p className="mt-0 mb-8 max-w-2xl text-ink-muted">
         Working references, not mockups. Switch the brand theme in the header to see civic navy,
         campaign crimson, or advocacy forest.
       </p>
@@ -35,7 +35,7 @@ function PatternsPage() {
       <div
         role="tablist"
         aria-label="Pattern"
-        className="mb-8 flex gap-1 overflow-auto rounded-md border border-line bg-canvas-subtle p-1"
+        className="mb-8 flex gap-6 overflow-auto border-b border-line"
       >
         {TABS.map((t) => (
           <button
@@ -45,8 +45,10 @@ function PatternsPage() {
             aria-selected={tab === t.id}
             onClick={() => setTab(t.id)}
             className={cn(
-              "min-h-11 flex-1 rounded-sm px-4 text-sm font-medium",
-              tab === t.id ? "bg-canvas-elevated text-ink shadow-(--shadow-1)" : "text-ink-muted",
+              "-mb-px min-h-11 border-b-2 px-1 text-sm font-medium whitespace-nowrap",
+              tab === t.id
+                ? "border-brand text-ink"
+                : "border-transparent text-ink-muted hover:text-ink",
             )}
           >
             {t.label}

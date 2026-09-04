@@ -94,9 +94,9 @@ export const THEME_ALLOWANCES = [
   },
   {
     token: "Gold",
-    civic: "Provenance rule only",
-    crimson: "Provenance rule only",
-    forest: "Provenance rule only",
+    civic: "Rules and markers only — never a fill",
+    crimson: "Rules and markers only — never a fill",
+    forest: "Rules and markers only — never a fill",
     locked: true,
   },
   {
@@ -174,3 +174,82 @@ export const OFFICIALS: Record<string, Official[]> = {
 export const SAMPLE_ROLL: VotePosition[] = RUIZ_VOTES;
 
 export const SAMPLE_AMOUNTS = [25, 50, 100, 250];
+
+/* ---------------------------------------------------------------------------
+ * Advocacy + elections samples. The demo world is fixed at Sept 2, 2026 so day
+ * counts and "as of" stamps stay reproducible across renders and screenshots.
+ * ------------------------------------------------------------------------- */
+
+export const DEMO_TODAY_ISO = "2026-09-02";
+export const DEMO_TODAY = "Sept 2, 2026";
+
+export const CALL_SCRIPT = {
+  office: "Office of Rep. Alexandra Ruiz",
+  district: "NY-02",
+  phone: "(202) 225-0002",
+  hours: "Phone hours 9–5 ET",
+  opener:
+    "Hi, my name is ___ and I live in ___. I'm a constituent and I'd like to leave a comment for the Representative.",
+  ask: "Please vote yes on H.R. 118, the Public Record Modernization Act.",
+  points: [
+    "It requires agencies to publish records in machine-readable formats.",
+    "It does not create a new agency or new spending authority.",
+    "The bill is on the floor calendar this month.",
+  ],
+} as const;
+
+export const DISTRICT_MATCHES: Record<string, { district: string; precision: "rooftop" | "centroid"; method: string; officialsKey: string }> = {
+  "12 bay shore rd, babylon ny": {
+    district: "NY-02",
+    precision: "rooftop",
+    method: "Census geocoder",
+    officialsKey: "11702",
+  },
+  "11702": {
+    district: "NY-02",
+    precision: "centroid",
+    method: "ZCTA centroid",
+    officialsKey: "11702",
+  },
+  "20001": {
+    district: "DC-AL",
+    precision: "centroid",
+    method: "ZCTA centroid",
+    officialsKey: "20001",
+  },
+} as const;
+
+export const ELECTION_MILESTONES = [
+  {
+    label: "Voter registration deadline",
+    iso: "2026-10-09",
+    display: "Oct 9, 2026",
+    note: "Mail applications must be postmarked by this date. Online and in person close the same day.",
+  },
+  {
+    label: "Mail ballot request deadline",
+    iso: "2026-10-27",
+    display: "Oct 27, 2026",
+    note: "Later requests are accepted in person only.",
+  },
+  { label: "Early voting opens", iso: "2026-10-24", display: "Oct 24, 2026" },
+  { label: "Election day", iso: "2026-11-03", display: "Nov 3, 2026", note: "Polls 6 a.m.–9 p.m. ET." },
+  {
+    label: "Primary election",
+    iso: "2026-06-23",
+    display: "Jun 23, 2026",
+    note: "Kept on the record so a late arrival can see what has already happened.",
+  },
+] as const;
+
+export const POLLING_HOURS = [
+  { day: "Early voting · Sat–Sun", hours: "9:00 a.m. – 5:00 p.m." },
+  { day: "Early voting · Mon–Fri", hours: "10:00 a.m. – 8:00 p.m." },
+  { day: "Election day", hours: "6:00 a.m. – 9:00 p.m." },
+] as const;
+
+export const RACE_CANDIDATES = [
+  { name: "Alexandra Ruiz", party: "Incumbent", votes: 84_112 },
+  { name: "Thomas Vance", party: "Challenger", votes: 79_640 },
+  { name: "Priya Raman", party: "Independent", votes: 6_204 },
+] as const;

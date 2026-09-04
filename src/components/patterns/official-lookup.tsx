@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Field, Input, OfficialCard } from "@/components/forum";
+import { Button, Card, FieldRow, Input, OfficialCard } from "@/components/forum";
 import { OFFICIALS } from "@/lib/forum-data";
 
 export function OfficialLookup() {
@@ -26,25 +26,26 @@ export function OfficialLookup() {
           Demo lookup. Live products should resolve from Census TIGER + member APIs, with an as-of
           date on every card.
         </p>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <div className="flex-1">
-            <Field id="zip" label="ZIP code">
-              <Input
-                id="zip"
-                inputMode="numeric"
-                maxLength={5}
-                value={zip}
-                onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") lookup();
-                }}
-              />
-            </Field>
-          </div>
-          <Button type="button" variant="official" size="lg" onClick={lookup} className="sm:w-40">
-            Look up
-          </Button>
-        </div>
+        <FieldRow
+          id="zip"
+          label="ZIP code"
+          action={
+            <Button type="button" variant="official" onClick={lookup}>
+              Look up
+            </Button>
+          }
+        >
+          <Input
+            id="zip"
+            inputMode="numeric"
+            maxLength={5}
+            value={zip}
+            onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") lookup();
+            }}
+          />
+        </FieldRow>
         {message ? (
           <p className="mt-3 mb-0 text-sm text-ink-muted" role="status">
             {message}

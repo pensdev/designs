@@ -1,9 +1,16 @@
-import { Switch } from "./switch";
+import { ChoiceGroup } from "./choice-group";
+
+type Period = "monthly" | "quarterly";
 
 type RecurringToggleProps = {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
-  period?: "monthly" | "quarterly";
+  period?: Period;
+};
+
+const PERIOD_LABEL: Record<Period, string> = {
+  monthly: "Monthly",
+  quarterly: "Quarterly",
 };
 
 export function RecurringToggle({
@@ -12,18 +19,19 @@ export function RecurringToggle({
   period = "monthly",
 }: RecurringToggleProps) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-md border border-line bg-canvas px-3 py-3">
-      <div>
-        <p id="recurring-label" className="text-sm font-medium text-ink">
-          Make this {period}
-        </p>
-        <p className="text-xs text-ink-muted">Off unless you turn it on. You can cancel anytime.</p>
-      </div>
-      <Switch
-        id="recurring"
-        checked={checked}
-        onCheckedChange={onCheckedChange}
-        aria-labelledby="recurring-label"
+    <div className="rounded-record border border-line bg-canvas px-3 py-3">
+      <p className="m-0 text-sm font-medium text-ink">Schedule</p>
+      <p className="mt-0.5 mb-3 text-xs text-ink-muted">
+        One-time unless you choose otherwise. You can cancel anytime.
+      </p>
+      <ChoiceGroup
+        label="Contribution schedule"
+        value={checked ? "recurring" : "once"}
+        onChange={(v) => onCheckedChange(v === "recurring")}
+        options={[
+          { value: "once", label: "One-time" },
+          { value: "recurring", label: PERIOD_LABEL[period] },
+        ]}
       />
     </div>
   );

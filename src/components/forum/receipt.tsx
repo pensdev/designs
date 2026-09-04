@@ -1,4 +1,3 @@
-import { Badge } from "./badge";
 import { Identifier } from "./identifier";
 import { ProvenanceStamp } from "./provenance-stamp";
 import { Record, RecordSection } from "./record";
@@ -14,9 +13,9 @@ type ReceiptProps = {
 
 export function Receipt({ id, amount, period, committee, last4 = "4242" }: ReceiptProps) {
   return (
-    <Record>
+    <Record className="border-t-2 border-t-gold">
       <RecordSection className="flex items-center justify-between gap-3">
-        <Badge tone="success">Recorded</Badge>
+        <Identifier tone="success">Recorded</Identifier>
         <Identifier>{id}</Identifier>
       </RecordSection>
       <RecordSection>

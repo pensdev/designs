@@ -1,4 +1,4 @@
-import { Badge } from "./badge";
+import { Identifier } from "./identifier";
 
 const TYPE_LABEL: Record<string, string> = {
   campaign: "Campaign",
@@ -20,7 +20,11 @@ export function IdentityBar({ orgName, orgType, verified }: IdentityBarProps) {
         {orgName}
         <span className="font-normal text-ink-muted"> · {TYPE_LABEL[orgType]}</span>
       </span>
-      {verified ? <Badge tone="success">Verified</Badge> : <Badge tone="muted">Unverified</Badge>}
+      {verified ? (
+        <Identifier tone="success">Verified</Identifier>
+      ) : (
+        <Identifier tone="muted">Unverified</Identifier>
+      )}
     </div>
   );
 }

@@ -1,4 +1,7 @@
+import { SegmentedMeter } from "./segmented-meter";
 import { formatCount } from "@/lib/utils";
+
+const SEGMENTS = 20;
 
 type PetitionCounterProps = {
   current: number;
@@ -16,12 +19,12 @@ export function PetitionCounter({ current, goal, updatedAt }: PetitionCounterPro
       </p>
       {goal ? (
         <div className="mt-2">
-          <div className="h-1.5 overflow-hidden rounded-full bg-canvas-subtle">
-            <div
-              className="h-full rounded-full bg-brand"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
+          <SegmentedMeter
+            segments={SEGMENTS}
+            filled={Math.round((pct / 100) * SEGMENTS)}
+            tone="brand"
+            label={`${pct}% of the ${formatCount(goal)} signature goal`}
+          />
           <p className="mt-1 mb-0 text-xs text-ink-muted">
             Goal {formatCount(goal)} · Updated {updatedAt}
           </p>
